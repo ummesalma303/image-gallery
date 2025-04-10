@@ -27,6 +27,7 @@ const Cards: React.FC<CardProps> = ({ img }) => {
 
   
   const deleteImage = async (id: string) => {
+    
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -57,7 +58,7 @@ const Cards: React.FC<CardProps> = ({ img }) => {
   
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-9">
+    <div >
       
           <Card
             className="border-[1px] border-gray-300 cursor-pointer"
