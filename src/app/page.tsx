@@ -1,6 +1,6 @@
 "use client"
 // import Image from 'next/image'
-
+import Swal from 'sweetalert2'
 import TextField from '@mui/material/TextField';
 // import AddImage from './components/AddImage';
 import Gallery from './components/gallery';
@@ -44,8 +44,13 @@ const Home:React.FC = () => {
         })
         const result = await response.json()
         console.log(result)
-        alert('image successfully uploaded')
         
+        Swal.fire({
+          title: "Success",
+          text: "image successfully uploaded",
+          icon: "success",
+          timer: 1500
+        });
       } catch (error) {
         console.log(error)
       }

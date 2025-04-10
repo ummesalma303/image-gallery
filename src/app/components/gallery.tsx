@@ -3,9 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import Cards from './Cards';
 
-// This can be used as a Server Component
+// export const dynamic = 'force-dynamic'
+
 const Gallery =  () => {
-  const [images, setImages] = useState<{ data: ImageType[] }>({ data: [] });
+  const [images, setImages] = useState<{ data: string[] }>({ data: [] });
   const handleData= async()=>{
 
     const res = await fetch('http://localhost:3000/api/gallery');
