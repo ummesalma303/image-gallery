@@ -1,6 +1,8 @@
 "use client"
 import Image from 'next/image'
 import React, { useState } from 'react'
+// import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 // import Button from '@mui/material/Button';
 
@@ -35,7 +37,8 @@ const Home:React.FC = () => {
   }
   
   return (
-    <div className='w-full h-screen bg-gray-100 flex justify-center items-center'>
+    <div className='w-full h-screen my-14'>
+      <div className="">
       <div className=''>
         
                 <label htmlFor="image" className="inline-block px-6 py-3 bg-green-400 text-white mb-2 text-sm">
@@ -49,13 +52,23 @@ const Home:React.FC = () => {
                 />
                 </label>
               </div>
-              <div className="">
+{/* search bar */}
+  <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        
+      </div>
+           
+
+
+       {/* <Button variant="contained">Upload</Button> */}
+
+
+
+       <div className="">
                {image && <Image src={image} width={90} height={40} alt='uploaded'/>}
                
   
 
               </div>
-       {/* <Button variant="contained">Upload</Button> */}
     </div>
   )
 }
