@@ -1,16 +1,15 @@
 "use client"
-import Image from 'next/image'
-import React, { useState } from 'react'
-// import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+// import Image from 'next/image'
 
+import TextField from '@mui/material/TextField';
+// import AddImage from './components/AddImage';
+import Gallery from './components/gallery';
 // import Button from '@mui/material/Button';
 
 
 const Home:React.FC = () => {
-  const [image, setImage] = useState< string>('');
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>)=>{
+ 
+ const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>)=>{
     const selectedFile = e.target.files?.[0]
    
   if (!selectedFile) {
@@ -27,31 +26,50 @@ const Home:React.FC = () => {
           body: formData
         })
         const res = await data.json()
-        setImage(res.url)
-      console.log(res.url)
+        
+        // data
+        const payload = {
+          name: res?.display_name,
+          originalName: res?.original_filename,
+          image: res?.url
+        }
+
+        // post data in database
+        const response = await fetch('http://localhost:3000/api/gallery',{
+          method:'POST',
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        const result = await response.json()
+        console.log(result)
+        alert('image successfully uploaded')
+        
       } catch (error) {
         console.log(error)
       }
      
     }
+
   }
+ 
   
   return (
     <div className='w-full h-screen my-14'>
-      <div className="">
-      <div className=''>
-        
-                <label htmlFor="image" className="inline-block px-6 py-3 bg-green-400 text-white mb-2 text-sm">
-                  Select Image:
-                <input onChange={(e)=>handleFileChange(e)} className='hidden'
-                  required
-                  type="file"
-                  id="image"
-                  name="image"
-                  accept="image/*"
-                />
-                </label>
-              </div>
+      <div className="w-11/12 mx-auto flex justify-between items-center">
+      <div>
+      <label htmlFor="image" className="inline-block px-6 py-3 bg-green-400 text-white mb-2 text-sm">
+                        Select Image:
+                      <input onChange={(e)=>handleFileChange(e)} className='hidden'
+                        required
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                      />
+                      </label>
+    </div>
 {/* search bar */}
   <TextField id="outlined-basic" label="Outlined" variant="outlined" />
         
@@ -64,8 +82,7 @@ const Home:React.FC = () => {
 
 
        <div className="">
-               {image && <Image src={image} width={90} height={40} alt='uploaded'/>}
-               
+               <Gallery/>
   
 
               </div>

@@ -3,14 +3,13 @@ import dbConnect from "@/lib/dbConnect"
 export async function GET() {
   try {
     const data = await dbConnect("images").find().toArray()
-    
+    console.log(data)
     return Response.json({ data});
   }catch(error){
     console.log(error)
     return Response.json({ error: 'Failed to fetch data' }, { status: 500 })
   }
 }
-
 
 export async function POST(request: Request) {
     try {
