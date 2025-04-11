@@ -1,6 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb"
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ot76b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = 'mongodb+srv://ImageGalleryUser:4O58hOYRV7TBdU92@cluster0.ot76b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const collectionNames = {
   images: "images",
@@ -16,7 +16,7 @@ function dbConnect(collectionName:string) {
           deprecationErrors: true,
         }
       });
-      return client.db(process.env.DB_NAME).collection(collectionName)
+      return client.db("ImageGellary").collection(collectionName)
 }
 
 export default dbConnect;

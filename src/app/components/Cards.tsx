@@ -28,6 +28,7 @@ const Cards: React.FC<CardProps> = ({ img }) => {
   
   const deleteImage = async (id: string) => {
     
+   try{
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -44,16 +45,27 @@ const Cards: React.FC<CardProps> = ({ img }) => {
       });
   
       const data = await res.json();
+      if (data.deletedCount > 0) {
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+        router.refresh();
+      }
   
-      Swal.fire({
-        title: "Deleted!",
-        text: "Your file has been deleted.",
-        icon: "success",
-      });
-  
-      router.refresh();
       console.log(data);
     }
+   }catch(error){
+    console.log(error)
+    Swal.fire({
+      title: "Error",
+      text:` ${error.message}`,
+      icon: "error",
+    });
+
+   }
   };
   
 
@@ -62,18 +74,20 @@ const Cards: React.FC<CardProps> = ({ img }) => {
       
           <Card
             className="border-[1px] border-gray-300 cursor-pointer"
-            sx={{ maxWidth: 345 }}
+            sx={{ maxWidth: 445,maxHeight: 345 }}
           >
             <CardActionArea>
             <PhotoProvider>
             <PhotoView src={image}>
-              <Image
+             <div className="h-36">
+             <Image className='h-full'
                 src={image}
                 alt={name}
                 width={550}
-                height={120}
+                height={60}
                 style={{ objectFit: 'cover' }}
               />
+             </div>
                </PhotoView>
                </PhotoProvider>
                </CardActionArea>

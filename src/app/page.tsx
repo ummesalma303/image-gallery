@@ -44,13 +44,15 @@ const Home:React.FC = () => {
         })
         const result = await response.json()
         console.log(result)
-        
-        Swal.fire({
-          title: "Success",
-          text: "image successfully uploaded",
-          icon: "success",
-          timer: 1500
-        });
+        if(result.acknowledged){
+
+          Swal.fire({
+            title: "Success",
+            text: "image successfully uploaded",
+            icon: "success",
+            timer: 1500
+          });
+        }
       } catch (error) {
         console.log(error)
       }
@@ -61,7 +63,7 @@ const Home:React.FC = () => {
  
   
   return (
-    <div className='w-full h-screen my-14'>
+    <div className='w-full min-h-screen my-14'>
       <div className="w-11/12 mx-auto flex justify-between items-center">
       <div>
       <label htmlFor="image" className="inline-block px-6 py-3 bg-green-400 text-white mb-2 text-sm">
